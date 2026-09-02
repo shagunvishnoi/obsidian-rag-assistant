@@ -125,10 +125,12 @@ class LLMService:
 
             answer = completion.choices[0].message.content.strip()
 
-            # Determine which source notes were actually relevant
-            cited_sources = [src for src in sorted(list(unique_sources)) if src.lower() in answer.lower() or True]
+            # Determine which source notes were actually cited in the answer
+            cited_sources = [src for src in sorted(list(unique_sources)) if src.lower() in answer.lower()]
+            if not cited_sources:
+                cited_sources = sorted(list(unique_sources))
 
-            return answer, list(unique_sources)
+            return answer, cited_sources
 
         except Exception as e:
             error_msg = str(e)

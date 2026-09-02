@@ -280,7 +280,7 @@ class RAGEngine:
 
         return retrieved_chunks
 
-    def get_vault_stats() -> Dict[str, Any]:
+    def get_vault_stats(self) -> Dict[str, Any]:
         """Returns statistics for currently loaded vault notes."""
         collection = self.get_collection()
         total_chunks = collection.count()
